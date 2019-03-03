@@ -100,6 +100,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		197D58D7222BB91E004E0638 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19DDB8702007316900DD5F1A /* Profile.swift */,
+				1987AB181FF692600032C710 /* Item.swift */,
+				19B0B577200345E6007F70E7 /* Record.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		197D58D8222BB92D004E0638 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1992044D1FF23B68007A9FCA /* Assets.xcassets */,
+				1992044F1FF23B68007A9FCA /* LaunchScreen.storyboard */,
+				1981298C2006095B0071C546 /* RecordItemTableViewCell.swift */,
+				19D9B5D42005E861007572E9 /* RecordTableViewCell.swift */,
+				1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */,
+				19A3C6801FFFBFD1008E9042 /* GrocerListTableViewCell.swift */,
+				19F8127A2003371D00FE19A9 /* GrocerySummaryTableViewCell.swift */,
+				199204471FF23B68007A9FCA /* Main.storyboard */,
+				190437A3202585B2009136CA /* images_icon.png */,
+				190437A520258787009136CA /* images_1_.png */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		197D58D9222BB933004E0638 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				199204431FF23B68007A9FCA /* AppDelegate.swift */,
+				199204451FF23B68007A9FCA /* ViewController.swift */,
+				19DDB87420073A0800DD5F1A /* LoginViewController.swift */,
+				1985BDCC200F7A0100A2CD3A /* LogOutViewController.swift */,
+				193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */,
+				19DDB8722007343D00DD5F1A /* NewProfileViewController.swift */,
+				19D9B5D82005EB8D007572E9 /* RecordItemViewController.swift */,
+				19D9B5D62005E8BE007572E9 /* RecordViewController.swift */,
+				1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */,
+				1987AB161FF692000032C710 /* HomeListTableViewController.swift */,
+				19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */,
+				19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */,
+				19F81278200336DB00FE19A9 /* GrocerySummaryViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		197D58DA222BB93B004E0638 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		199204371FF23B68007A9FCA = {
 			isa = PBXGroup;
 			children = (
@@ -121,32 +175,10 @@
 		199204421FF23B68007A9FCA /* Everyday's Grocery */ = {
 			isa = PBXGroup;
 			children = (
-				199204431FF23B68007A9FCA /* AppDelegate.swift */,
-				199204451FF23B68007A9FCA /* ViewController.swift */,
-				199204471FF23B68007A9FCA /* Main.storyboard */,
-				190437A3202585B2009136CA /* images_icon.png */,
-				19DDB87420073A0800DD5F1A /* LoginViewController.swift */,
-				190437A520258787009136CA /* images_1_.png */,
-				1985BDCC200F7A0100A2CD3A /* LogOutViewController.swift */,
-				193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */,
-				19DDB8722007343D00DD5F1A /* NewProfileViewController.swift */,
-				19DDB8702007316900DD5F1A /* Profile.swift */,
-				19D9B5D82005EB8D007572E9 /* RecordItemViewController.swift */,
-				1981298C2006095B0071C546 /* RecordItemTableViewCell.swift */,
-				19D9B5D62005E8BE007572E9 /* RecordViewController.swift */,
-				19D9B5D42005E861007572E9 /* RecordTableViewCell.swift */,
-				1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */,
-				1987AB161FF692000032C710 /* HomeListTableViewController.swift */,
-				1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */,
-				1987AB181FF692600032C710 /* Item.swift */,
-				19B0B577200345E6007F70E7 /* Record.swift */,
-				19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */,
-				19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */,
-				19A3C6801FFFBFD1008E9042 /* GrocerListTableViewCell.swift */,
-				19F81278200336DB00FE19A9 /* GrocerySummaryViewController.swift */,
-				19F8127A2003371D00FE19A9 /* GrocerySummaryTableViewCell.swift */,
-				1992044D1FF23B68007A9FCA /* Assets.xcassets */,
-				1992044F1FF23B68007A9FCA /* LaunchScreen.storyboard */,
+				197D58D7222BB91E004E0638 /* Model */,
+				197D58D8222BB92D004E0638 /* View */,
+				197D58D9222BB933004E0638 /* Controller */,
+				197D58DA222BB93B004E0638 /* Services */,
 				199204521FF23B68007A9FCA /* Info.plist */,
 				1992044A1FF23B68007A9FCA /* Everyday_s_Grocery.xcdatamodeld */,
 			);
