@@ -13,6 +13,7 @@ class Profile: NSObject, NSCoding {
 
     var password: String
     var moneyUnit: String
+    var email: String
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -24,13 +25,14 @@ class Profile: NSObject, NSCoding {
     struct PropertyKey {
         static let password = "password"
         static let moneyUnit = "moneyUnit"
+        static let email = "email"
       
         
     }
     
     //MARK: Initialization
     
-    init?(password: String, moneyUnit: String) {
+    init?(password: String, moneyUnit: String, email: String) {
         
         
         guard !password.isEmpty else {
@@ -39,11 +41,14 @@ class Profile: NSObject, NSCoding {
         guard !moneyUnit.isEmpty else {
             return nil
         }
-      
+        guard !email.isEmpty else {
+            return nil
+        }
         
         // Initialize stored properties.
         self.password = password
         self.moneyUnit = moneyUnit
+        self.email = email
        
     }
     
@@ -52,6 +57,7 @@ class Profile: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(password, forKey: PropertyKey.password)
         aCoder.encode(moneyUnit, forKey: PropertyKey.moneyUnit)
+         aCoder.encode(email, forKey: PropertyKey.email)
        
     }
     
@@ -68,10 +74,13 @@ class Profile: NSObject, NSCoding {
             return nil
         }
         
-        
+        guard let email = aDecoder.decodeObject(forKey: PropertyKey.email) as? String else {
+            os_log("Unable to decode the email for a Item object.", log: OSLog.default, type: .debug)
+            return nil
+        }
         
         // Must call designated initializer.
-        self.init(password: password, moneyUnit: moneyUnit)
+        self.init(password: password, moneyUnit: moneyUnit, email: email)
         
     }
     

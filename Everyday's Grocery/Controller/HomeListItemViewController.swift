@@ -8,10 +8,17 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
-class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
+class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, PhotoCaptureViewControllerDelegate {
+     func PhotoCaptureViewControllerResponse(url: String) {
+        savedimageUrl = url
+    }
+    
 
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var itemNameTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var estimatedAmountTextField: UITextField!
     @IBOutlet weak var estimatedPriceTestField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -25,8 +32,25 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
     
     var password: String?
     
+    var savedimageUrl = String()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !savedimageUrl.isEmpty {
+            let image = getImageFromPath(sender: savedimageUrl) as UIImage
+            
+            imageView.image = image
+        }
+        updateSaveButtonState()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        
         itemNameTextField.delegate = self
         estimatedPriceTestField.delegate = self
         estimatedAmountTextField.delegate = self
@@ -42,13 +66,23 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         moneyTextField.text = unitOfMoney
         self.automaticallyAdjustsScrollViewInsets = false
         // Set up views if editing an existing Item.
+        
+        if !savedimageUrl.isEmpty {
+            let image = getImageFromPath(sender: savedimageUrl) as UIImage
+            
+            imageView.image = image
+        }
         if let item = item {
             navigationItem.title = item.itemName
             itemNameTextField.text = item.itemName
             estimatedPriceTestField.text = item.estimatedPrice.description
             estimatedAmountTextField.text = item.estimatedAmount.description
             unitTextField.text = item.unit
-            
+            if !item.imageURL.isEmpty {
+                let image = getImageFromPath(sender: item.imageURL) as UIImage
+                
+                imageView.image = image
+            }
             
         }
         
@@ -56,6 +90,24 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         updateSaveButtonState()
     }
 
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+            // Do whatever you want with the image
+        }
+        
+        return image
+    }
+    
     
     func isModal() -> Bool {
         if self.presentingViewController != nil {
@@ -117,7 +169,7 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         
         let text5 = moneyTextField.text ?? ""
         
-        saveButton.isEnabled = !text.isEmpty && !text2.isEmpty && !text3.isEmpty && !text4.isEmpty && !text5.isEmpty
+        saveButton.isEnabled = !text.isEmpty && !text2.isEmpty && !text3.isEmpty && !text4.isEmpty && !text5.isEmpty && !savedimageUrl.isEmpty
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -143,6 +195,19 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         
         super.prepare(for: segue, sender: sender)
 
+        switch(segue.identifier ?? "") {
+            
+        case "photo":
+        guard let photoCaptureViewController = segue.destination as? PhotoCaptureViewController else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+        
+       photoCaptureViewController.delegate = self
+        
+        
+        default:
+     
+    
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
@@ -165,7 +230,9 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         let realAmount = 0.0
       
         
-        item = Item(estimatedPrice: estimatedPrice, realPrice: Float(realPrice), itemName: itemName, estimatedAmount: estimatedAmount, realAmount: Float(realAmount), unit: unit)
+        item = Item(estimatedPrice: estimatedPrice, realPrice: Float(realPrice), itemName: itemName, estimatedAmount: estimatedAmount, realAmount: Float(realAmount), unit: unit, imageURL: savedimageUrl)
     }
  
+}
+
 }

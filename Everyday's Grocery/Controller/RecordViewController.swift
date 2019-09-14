@@ -8,27 +8,35 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet weak var bannerView: GADBannerView!
+   
     var records = [Record]()
     var profile_records = [Record]()
     var copy_records = [Record]()
     var unitOfMoney: String?
     var password: String?
+    var email: String?
     var dateTime: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        let alertTitle = NSLocalizedString("Edit", comment: "")
         navigationItem.rightBarButtonItem = editButtonItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
         
         
-        tableView.backgroundView = UIImageView(image: UIImage(named: "images_1_.png"))
-        tableView.backgroundView?.contentMode = .scaleAspectFit
+      //  tableView.backgroundView = UIImageView(image: UIImage(named: "images_1_.png"))
+     //   tableView.backgroundView?.contentMode = .scaleAspectFit
 
         tableView.separatorStyle = .none
         
@@ -63,9 +71,11 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func editButtonPressed(){
         tableView.setEditing(!tableView.isEditing, animated: true)
         if tableView.isEditing == true{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
+            let done = NSLocalizedString("Done", comment: "")
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: done, style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
         }else{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
+            let edit = NSLocalizedString("Edit", comment: "")
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: edit, style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))
         }
     }
 
@@ -98,8 +108,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let record = profile_records[indexPath.row]
         
         cell.selectionStyle = .none
-        
-        cell.record_dateTime.text = "Record Date &Time : " + record.dateTime
+         let edit = NSLocalizedString("Record Date &Time : ", comment: "")
+        cell.record_dateTime.text = edit + record.dateTime
         
          cell.layer.backgroundColor = UIColor.clear.cgColor
         
@@ -189,6 +199,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
             recordItemViewController.unitOfMoney = unitOfMoney
             
             recordItemViewController.password = password
+            
+            recordItemViewController.email = email
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")

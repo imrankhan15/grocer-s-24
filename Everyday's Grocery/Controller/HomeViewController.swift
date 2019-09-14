@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class HomeViewController: UIViewController {
 
     
     var unitOfMoney: String?
     var password: String?
-    
+    var email: String?
+    @IBOutlet weak var bannerView: GADBannerView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
         // Do any additional setup after loading the view.
     }
 
@@ -47,6 +53,7 @@ class HomeViewController: UIViewController {
             
             recordViewController.unitOfMoney = unitOfMoney
             recordViewController.password = password
+            recordViewController.email = email
             
         case "MakeNew":
             

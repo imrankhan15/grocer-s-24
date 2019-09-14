@@ -10,6 +10,8 @@ import UIKit
 
 class RecordItemTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var recordItemImage: UIImageView!
+    
     @IBOutlet weak var itemDetails: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class HomeListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -18,6 +19,9 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var button_gotogrocer: UIButton!
     
+    
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var bannerView: GADBannerView!
     var items = [Item]()
 
     var unitOfMoney: String?
@@ -25,8 +29,13 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
+        let alertTitle = NSLocalizedString("Edit", comment: "")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
 
         items = [Item]()
         
@@ -47,15 +56,17 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
         for Item in items{
             total += Float(Item.estimatedAmount) * Float(Item.estimatedPrice)
         }
-        
-        label_budget.text = " Your Estimated Budget : " + total.description + " " + unitOfMoney! + " "
+        let alertTitle = NSLocalizedString(" Your Estimated Budget : ", comment: "")
+        label_budget.text =  alertTitle + total.description + " " + unitOfMoney! + " "
     }
     func editButtonPressed(){
         tableView.setEditing(!tableView.isEditing, animated: true)
         if tableView.isEditing == true{
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
+            let alertTitle = NSLocalizedString("Done", comment: "")
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
         }else{
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
+            let alertTitle = NSLocalizedString("Edit", comment: "")
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
         }
     }
     
@@ -89,14 +100,36 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         let item = items[indexPath.row]
         
-       
-        cell.itemName.text = "Item Name is: " + item.itemName
-        cell.estimatedAmount.text = "Estimated Amount is: " + item.estimatedAmount.description + " " + item.unit + " "
-        cell.estimatedPrice.text = "Estimated Price is: " + item.estimatedPrice.description + " " + unitOfMoney! + " "
+       let alertTitle1 = NSLocalizedString("Item Name is: ", comment: "")
+        let alertTitle2 = NSLocalizedString("Estimated Amount is: ", comment: "")
+        let alertTitle3 = NSLocalizedString("Estimated Price is: ", comment: "")
+        cell.itemName.text =  alertTitle1 + item.itemName
+        cell.estimatedAmount.text =  alertTitle2 + item.estimatedAmount.description + " " + item.unit + " "
+        cell.estimatedPrice.text = alertTitle3 + item.estimatedPrice.description + " " + unitOfMoney! + " "
+        let image = getImageFromPath(sender: item.imageURL) as UIImage
+        
+         cell.cellImage.image = image
         
         return cell
     }
  
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+            // Do whatever you want with the image
+        }
+        
+        return image
+    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -166,7 +199,10 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
 
-   
+    @IBAction func returnToMain(_ sender: UIButton) {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         super.prepare(for: segue, sender: sender)
@@ -204,6 +240,7 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
             itemDetailViewController.unitOfMoney = unitOfMoney
             itemDetailViewController.password = password
         
+       
         case "GoToGrocer":
             
             guard let grocerListViewController = segue.destination as? GrocerListViewController else {
@@ -216,7 +253,7 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
             grocerListViewController.password = password
             
         default:
-            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            print("default")
         }
     }
     

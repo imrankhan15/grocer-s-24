@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class LogOutViewController: UIViewController {
 
+    @IBOutlet weak var bannerView: GADBannerView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
     }
 
     override func didReceiveMemoryWarning() {

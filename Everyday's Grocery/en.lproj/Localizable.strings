@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  Everyday's Grocery
+
+  Created by Muhammad Faisal Imran Khan on 25/8/19.
+  Copyright © 2019 MI Apps. All rights reserved.
+*/
+
+"No Match" = "No Match";
+"Please Register" = "Please Register";
+"Password Already Exists" = "Password Already Exists";
+"Please Select Another Password" = "Please Select Another Password";
+" Item Name: " = " Item Name: ";
+", Bought Amount: " = ", Bought Amount: ";
+", Bought Price: " = ", Bought Price: ";
+"Total Spent :" = "Total Spent :";
+"Mail Report" = "Mail Report";
+"Edit" = "Edit";
+"Done" = "Done";
+"Record Date &Time : " = "Record Date &Time : ";
+"Item Name is: " = "Item Name is: ";
+"Estimated Amount is: " = "Estimated Amount is: ";
+"Estimated Price is: " = "Estimated Price is: ";
+" Your Estimated Budget : " = " Your Estimated Budget : ";
+" Item Name: " = " Item Name: ";
+", Estimated Amount: " = ", Estimated Amount: ";
+", Estimated Price: " = ", Estimated Price: ";
+", Real Amount: " = ", Real Amount: ";
+", Real Price: " = ", Real Price: ";
+"No Value" = "No Value";
+" Money Spent : " = " Money Spent : ";
+" Your Estimated Budget : " = " Your Estimated Budget : ";
+" Item Name: "   = " Item Name: ";
+", Bought Amount: " = ", Bought Amount: ";
+", Bought Price: " = ", Bought Price: ";

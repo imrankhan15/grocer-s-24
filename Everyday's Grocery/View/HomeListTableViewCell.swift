@@ -14,6 +14,8 @@ class HomeListTableViewCell: UITableViewCell {
     @IBOutlet weak var estimatedAmount: UILabel!
     @IBOutlet weak var estimatedPrice: UILabel!
    
+    @IBOutlet weak var cellImage: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

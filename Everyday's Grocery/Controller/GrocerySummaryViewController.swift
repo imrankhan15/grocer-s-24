@@ -8,15 +8,20 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    
     
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet weak var label_total_spent: UILabel!
     
-     var items = [Item]()
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+    
+    var items = [Item]()
     var records = [Record]()
     
     var record: Record?
@@ -28,6 +33,10 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
         self.tableView.separatorStyle = .none
 
@@ -118,8 +127,8 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
         for Item in items{
             total += Float(Item.realAmount) * Float(Item.realPrice)
         }
-        
-        label_total_spent.text = " Money Spent : " + total.description + " " + unitOfMoney! + " "
+        let alertTitle = NSLocalizedString(" Money Spent : ", comment: "")
+        label_total_spent.text =  alertTitle + total.description + " " + unitOfMoney! + " "
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -153,9 +162,11 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
         realAmountString = item.realAmount.description + " " + item.unit
         
         realPriceString = item.realPrice.description + " " + unitOfMoney! + " "
-        
-        cell.itemName.text = " Item Name: " + item.itemName
-            + ", Bought Amount: " + realAmountString + " " + ", Bought Price: " + realPriceString
+        let alertTitle1 = NSLocalizedString(" Item Name: ", comment: "")
+        let alertTitle2 = NSLocalizedString(", Bought Amount: ", comment: "")
+        let alertTitle3 = NSLocalizedString(", Bought Price: ", comment: "")
+        cell.itemName.text =  alertTitle1 + item.itemName
+            + alertTitle2 + realAmountString + " " + alertTitle3 + realPriceString
         
         return cell
     }

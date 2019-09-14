@@ -8,13 +8,16 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var currencyTextField: UITextField!
     
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
     var profiles = [Profile]()
@@ -24,13 +27,18 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
         passwordTextField.delegate = self
         currencyTextField.delegate = self
-        
+        emailTextField.delegate = self
         passwordTextField.autocorrectionType = .no
         
         currencyTextField.autocorrectionType = .no
         
+        emailTextField.autocorrectionType = .no
         
         updateSaveButtonState()
         
@@ -45,7 +53,10 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
         let text = passwordTextField.text ?? ""
         
         let text1 = currencyTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty && !text1.isEmpty
+        
+        let text2 = emailTextField.text ?? ""
+        
+        saveButton.isEnabled = !text.isEmpty && !text1.isEmpty && !text2.isEmpty
     }
     
     
@@ -77,8 +88,11 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
     @IBAction func done_action(_ sender: UIButton) {
         
         if isMatched(){
+            let alertTitle = NSLocalizedString("Password Already Exists", comment: "")
+            let alertMessage = NSLocalizedString("Please Select Another Password", comment: "")
             
-            let alertController = UIAlertController(title: "Password Already Exists", message: "Please Select Another Password", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+            
+            let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
             
             
             
@@ -104,9 +118,9 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
             
             let currency = currencyTextField.text
             
+            let email = emailTextField.text
             
-            
-            profile = Profile(password: password!, moneyUnit: currency!)
+            profile = Profile(password: password!, moneyUnit: currency!, email: email!)
             
             profiles.append(profile!)
             saveProfiles()

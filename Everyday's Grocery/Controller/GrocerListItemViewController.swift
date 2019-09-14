@@ -8,9 +8,11 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var realAmountTextField: UITextField!
     @IBOutlet weak var realPriceTextField: UITextField!
     
@@ -20,13 +22,19 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
     
     @IBOutlet weak var moneyTextField: UITextField!
     
-     var item: Item?
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var item: Item?
     
     var unitOfMoney: String?
     var password: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
 
         realAmountTextField.delegate = self
         
@@ -43,6 +51,7 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
         
         
         moneyTextField.text = unitOfMoney
+        
         
         if let item = item {
                     navigationItem.title = item.itemName
@@ -78,6 +87,12 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
             realPriceTextField.text = realPriceString
             
             unitTextField.text = item.unit
+            
+            if !item.imageURL.isEmpty {
+                let image = getImageFromPath(sender: item.imageURL) as UIImage
+                
+                imageView.image = image
+            }
            
             
         }
@@ -86,6 +101,23 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
         
     }
 
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+            // Do whatever you want with the image
+        }
+        
+        return image
+    }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
@@ -160,8 +192,9 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
         
         let realAmount = Float(realAmountTextField.text!) ?? 0
         
+        let imageurl = item?.imageURL
         
-        item = Item(estimatedPrice: estimatedPrice!, realPrice: Float(realPrice), itemName: itemName!, estimatedAmount: estimatedAmount!, realAmount: Float(realAmount), unit: unit!)
+        item = Item(estimatedPrice: estimatedPrice!, realPrice: Float(realPrice), itemName: itemName!, estimatedAmount: estimatedAmount!, realAmount: Float(realAmount), unit: unit!, imageURL: imageurl!)
     }
     
 

@@ -17,6 +17,7 @@ class Item: NSObject, NSCoding {
     var estimatedAmount: Float
     var realAmount: Float
     var unit: String
+    var imageURL: String
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -31,12 +32,13 @@ class Item: NSObject, NSCoding {
         static let estimatedAmount = "estimatedAmount"
         static let realAmount = "realAmount"
         static let unit = "unit"
+        static let imageURL = "imageURL"
         
     }
     
     //MARK: Initialization
     
-    init?(estimatedPrice: Float, realPrice: Float, itemName: String, estimatedAmount: Float, realAmount: Float, unit: String) {
+    init?(estimatedPrice: Float, realPrice: Float, itemName: String, estimatedAmount: Float, realAmount: Float, unit: String, imageURL: String) {
         
         
         guard !itemName.isEmpty else {
@@ -51,7 +53,9 @@ class Item: NSObject, NSCoding {
         guard estimatedAmount > 0 else {
             return nil
         }
-        
+        guard !imageURL.isEmpty else {
+            return nil
+        }
         // Initialize stored properties.
         self.estimatedPrice = estimatedPrice
         self.realPrice = realPrice
@@ -59,6 +63,7 @@ class Item: NSObject, NSCoding {
         self.estimatedAmount = estimatedAmount
         self.realAmount = realAmount
         self.unit = unit
+        self.imageURL = imageURL
         
     }
     
@@ -71,6 +76,7 @@ class Item: NSObject, NSCoding {
         aCoder.encode(estimatedAmount, forKey: PropertyKey.estimatedAmount)
         aCoder.encode(realPrice, forKey: PropertyKey.realPrice)
         aCoder.encode(realAmount, forKey: PropertyKey.realAmount)
+        aCoder.encode(imageURL, forKey: PropertyKey.imageURL)
 
     }
     
@@ -97,10 +103,13 @@ class Item: NSObject, NSCoding {
         
         let realPrice = aDecoder.decodeFloat(forKey: PropertyKey.realPrice)
         
-        
+        guard let imageURL = aDecoder.decodeObject(forKey: PropertyKey.imageURL) as? String else {
+            os_log("Unable to decode the url for a Item object.", log: OSLog.default, type: .debug)
+            return nil
+        }
         
         // Must call designated initializer.
-        self.init(estimatedPrice: estimatedPrice, realPrice: realPrice, itemName: itemName, estimatedAmount: estimatedAmount, realAmount: realAmount, unit: unit)
+        self.init(estimatedPrice: estimatedPrice, realPrice: realPrice, itemName: itemName, estimatedAmount: estimatedAmount, realAmount: realAmount, unit: unit, imageURL: imageURL)
         
     }
 

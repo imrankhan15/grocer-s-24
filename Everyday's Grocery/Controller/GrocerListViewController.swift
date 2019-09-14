@@ -8,6 +8,8 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
+
 
 class GrocerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -17,6 +19,7 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var label_budget: UILabel!
   
     @IBOutlet weak var label_money_spent: UILabel!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var items = [Item]()
     
@@ -26,6 +29,10 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
         
         
         update_label_budget()
@@ -33,6 +40,7 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.tableView.separatorStyle = .none
 
+        
     }
     
     private func loadSampleItems() {
@@ -53,8 +61,8 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         for Item in items{
             total += Float(Item.estimatedAmount) * Float(Item.estimatedPrice)
         }
-        
-        label_budget.text = " Your Estimated Budget : " + total.description + " " + unitOfMoney! + " "
+        let alertTitle = NSLocalizedString(" Your Estimated Budget : ", comment: "")
+        label_budget.text = alertTitle + total.description + " " + unitOfMoney! + " "
     }
 
     @IBAction func button_home(_ sender: UIButton) {
@@ -68,8 +76,8 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         for Item in items{
             total += Float(Item.realAmount) * Float(Item.realPrice)
         }
-        
-        label_money_spent.text = " Money Spent : " + total.description + " " + unitOfMoney! + " "
+         let alertTitle = NSLocalizedString(" Money Spent : ", comment: "")
+        label_money_spent.text = alertTitle + total.description + " " + unitOfMoney! + " "
     }
 
     // MARK: - Table view data source
@@ -98,8 +106,8 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         var realPriceString = ""
         
         if item.realAmount < 0.1 {
-            
-            realAmountString = "No Value"
+            let alertTitle = NSLocalizedString("No Value", comment: "")
+            realAmountString = alertTitle
         
         } else {
             
@@ -109,17 +117,23 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         if item.realPrice < 0.1 {
-            
-            realPriceString = "No Value"
+             let alertTitle = NSLocalizedString("No Value", comment: "")
+            realPriceString = alertTitle
             
         } else {
             
             realPriceString = item.realPrice.description + " " + unitOfMoney! + " "
             
         }
+        let alertTitle1 = NSLocalizedString(" Item Name: ", comment: "")
         
-        cell.itemName.text = " Item Name: " + item.itemName
-       +  ", Estimated Amount: " + item.estimatedAmount.description + " " + item.unit + ", Estimated Price: " + item.estimatedPrice.description + " " + unitOfMoney! + " " + ", Real Amount: " + realAmountString + " " + ", Real Price: " + realPriceString
+        let alertTitle2 = NSLocalizedString(", Estimated Amount: ", comment: "")
+        let alertTitle3 = NSLocalizedString(", Estimated Price: ", comment: "")
+        let alertTitle4 = NSLocalizedString(", Real Amount: ", comment: "")
+        let alertTitle5 = NSLocalizedString(", Real Price: ", comment: "")
+        
+        cell.itemName.text =  alertTitle1 + item.itemName
+       +   alertTitle2 + item.estimatedAmount.description + " " + item.unit + alertTitle3 + item.estimatedPrice.description + " " + unitOfMoney! + " " +  alertTitle4 + realAmountString + " " + alertTitle5  + realPriceString
         
         return cell
     }

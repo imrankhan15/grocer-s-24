@@ -1,0 +1,162 @@
+
+/* Class = "UIBarButtonItem"; title = "Home List"; ObjectID = "1iu-rr-pqV"; */
+"1iu-rr-pqV.title" = "Home List";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "1uE-fX-elI"; */
+"1uE-fX-elI.normalTitle" = "Done";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "3zZ-tA-IyB"; */
+"3zZ-tA-IyB.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4Gx-2W-4dZ"; */
+"4Gx-2W-4dZ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "  Show Previous Lists  "; ObjectID = "4WH-AN-Tgl"; */
+"4WH-AN-Tgl.normalTitle" = "  Show Previous Lists  ";
+
+/* Class = "UITextField"; placeholder = "real amount bought"; ObjectID = "4dr-ad-5XK"; */
+"4dr-ad-5XK.placeholder" = "real amount bought";
+
+/* Class = "UILabel"; text = "Your Estimated Budget : 0 Taka"; ObjectID = "6ea-AR-F4y"; */
+"6ea-AR-F4y.text" = "Your Estimated Budget : 0 Taka";
+
+/* Class = "UIButton"; normalTitle = "Make New List"; ObjectID = "7Ek-iE-kqr"; */
+"7Ek-iE-kqr.normalTitle" = "Make New List";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "9MJ-C0-8g9"; */
+"9MJ-C0-8g9.normalTitle" = "Register";
+
+/* Class = "UIButton"; normalTitle = "Retake"; ObjectID = "AKW-tB-qOb"; */
+"AKW-tB-qOb.normalTitle" = "Retake";
+
+/* Class = "UITextField"; placeholder = "unit"; ObjectID = "AbV-sZ-tM0"; */
+"AbV-sZ-tM0.placeholder" = "unit";
+
+/* Class = "UINavigationItem"; title = "Grocery Summary"; ObjectID = "BZH-Xu-BfT"; */
+"BZH-Xu-BfT.title" = "Grocery Summary";
+
+/* Class = "UITextField"; placeholder = "Currency"; ObjectID = "CJQ-oS-Hqm"; */
+"CJQ-oS-Hqm.placeholder" = "Currency";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "Ci8-Vt-TiF"; */
+"Ci8-Vt-TiF.title" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Add a Picture"; ObjectID = "Clv-xG-ohh"; */
+"Clv-xG-ohh.normalTitle" = "Add a Picture";
+
+/* Class = "UILabel"; text = "Total Spent:"; ObjectID = "GFj-C3-wwR"; */
+"GFj-C3-wwR.text" = "Total Spent:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GK1-di-9Lx"; */
+"GK1-di-9Lx.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Lbj-xh-3mA"; */
+"Lbj-xh-3mA.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "M5J-1u-3of"; */
+"M5J-1u-3of.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "real price"; ObjectID = "Mjo-IT-2Pw"; */
+"Mjo-IT-2Pw.placeholder" = "real price";
+
+/* Class = "UIButton"; normalTitle = "LogOut"; ObjectID = "N6H-Eb-6d8"; */
+"N6H-Eb-6d8.normalTitle" = "LogOut";
+
+/* Class = "UIBarButtonItem"; title = "Grocery"; ObjectID = "Qyh-oa-WCJ"; */
+"Qyh-oa-WCJ.title" = "Grocery";
+
+/* Class = "UINavigationItem"; title = "Record Details"; ObjectID = "RNs-FV-vRv"; */
+"RNs-FV-vRv.title" = "Record Details";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "RQs-o3-pKC"; */
+"RQs-o3-pKC.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "SIQ-2b-RcQ"; */
+"SIQ-2b-RcQ.normalTitle" = "Log In";
+
+/* Class = "UITextField"; placeholder = "Enter Password"; ObjectID = "Um7-pb-pyc"; */
+"Um7-pb-pyc.placeholder" = "Enter Password";
+
+/* Class = "UILabel"; text = "Total Spent: "; ObjectID = "VGL-Bd-RiR"; */
+"VGL-Bd-RiR.text" = "Total Spent: ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Vxc-2F-y15"; */
+"Vxc-2F-y15.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "ZR0-EJ-OQi"; */
+"ZR0-EJ-OQi.normalTitle" = "Log In";
+
+/* Class = "UIButton"; normalTitle = "Go To Grocer"; ObjectID = "bYC-J7-Zj6"; */
+"bYC-J7-Zj6.normalTitle" = "Go To Grocer";
+
+/* Class = "UITextField"; placeholder = "item name"; ObjectID = "biJ-wf-3bI"; */
+"biJ-wf-3bI.placeholder" = "item name";
+
+/* Class = "UILabel"; text = "Your Estimated Budget: 0 Taka"; ObjectID = "c5Q-cg-yVX"; */
+"c5Q-cg-yVX.text" = "Your Estimated Budget: 0 Taka";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dny-pq-Tay"; */
+"dny-pq-Tay.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "unit"; ObjectID = "eHk-IZ-siN"; */
+"eHk-IZ-siN.placeholder" = "unit";
+
+/* Class = "UITextField"; placeholder = "item amount"; ObjectID = "gNd-j2-TLg"; */
+"gNd-j2-TLg.placeholder" = "item amount";
+
+/* Class = "UINavigationItem"; title = "Home Page"; ObjectID = "gxb-ma-wMP"; */
+"gxb-ma-wMP.title" = "Home Page";
+
+/* Class = "UIButton"; normalTitle = "Accept "; ObjectID = "h6A-Dg-TeU"; */
+"h6A-Dg-TeU.normalTitle" = "Accept ";
+
+/* Class = "UIBarButtonItem"; title = "Old Records"; ObjectID = "hQn-LW-cBh"; */
+"hQn-LW-cBh.title" = "Old Records";
+
+/* Class = "UIButton"; normalTitle = "Save & Go Home"; ObjectID = "iCa-8X-bav"; */
+"iCa-8X-bav.normalTitle" = "Save & Go Home";
+
+/* Class = "UINavigationItem"; title = "Old Records"; ObjectID = "jno-JK-ApD"; */
+"jno-JK-ApD.title" = "Old Records";
+
+/* Class = "UILabel"; text = "Money Spent : 0 Taka"; ObjectID = "kag-XZ-Kbr"; */
+"kag-XZ-Kbr.text" = "Money Spent : 0 Taka";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "kbs-hA-ZrL"; */
+"kbs-hA-ZrL.placeholder" = "Password";
+
+/* Class = "UINavigationItem"; title = "Home List Preparation"; ObjectID = "kuQ-Fq-smS"; */
+"kuQ-Fq-smS.title" = "Home List Preparation";
+
+/* Class = "UITextField"; placeholder = "unit of money"; ObjectID = "l4K-1U-OSp"; */
+"l4K-1U-OSp.placeholder" = "unit of money";
+
+/* Class = "UINavigationItem"; title = "At Grocery"; ObjectID = "lnM-z1-UxL"; */
+"lnM-z1-UxL.title" = "At Grocery";
+
+/* Class = "UIButton"; normalTitle = "Complete"; ObjectID = "n54-7W-hyP"; */
+"n54-7W-hyP.normalTitle" = "Complete";
+
+/* Class = "UITextField"; placeholder = "unit of Money"; ObjectID = "nAu-CV-mXY"; */
+"nAu-CV-mXY.placeholder" = "unit of Money";
+
+/* Class = "UINavigationItem"; title = "At Grocer"; ObjectID = "nzS-0d-Aj8"; */
+"nzS-0d-Aj8.title" = "At Grocer";
+
+/* Class = "UIButton"; normalTitle = "Main Page"; ObjectID = "oSk-tn-ynf"; */
+"oSk-tn-ynf.normalTitle" = "Main Page";
+
+/* Class = "UINavigationItem"; title = "Item Details"; ObjectID = "prL-TI-j1N"; */
+"prL-TI-j1N.title" = "Item Details";
+
+/* Class = "UITextField"; placeholder = "estimated price"; ObjectID = "qKq-pu-6zN"; */
+"qKq-pu-6zN.placeholder" = "estimated price";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qOl-h8-aLM"; */
+"qOl-h8-aLM.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Home"; ObjectID = "rcp-FK-ELQ"; */
+"rcp-FK-ELQ.title" = "Home";
+
+/* Class = "UILabel"; text = "Position Product into View Click Checkmark"; ObjectID = "vjx-RJ-wNO"; */
+"vjx-RJ-wNO.text" = "Position Product into View Click Checkmark";

@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import MessageUI
 
-class RecordItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecordItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 
     var items = [Item]()
     
@@ -17,23 +19,123 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
     var unitOfMoney: String?
     
     var password: String?
-    
+    var email: String?
     @IBOutlet weak var label_total: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundView = UIImageView(image: UIImage(named: "images_1_.png"))
-        tableView.backgroundView?.contentMode = .scaleAspectFit
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        let alertTitle = NSLocalizedString("Mail Report", comment: "")
+         navigationItem.rightBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(self.mailReport))
+     
         
         tableView.separatorStyle = .none
         
         update_label_total()
     }
 
+    func mailReport(){
+        let mailComposeViewController = configureMailController()
+        if MFMailComposeViewController.canSendMail(){
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showMailError()
+        }
+    }
+    func configureMailController() -> MFMailComposeViewController{
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients([email!])
+        mailComposerVC.setSubject("Your grocery list")
+        var message = "<!DOCTYPE html><html><body> <p>This is your grocery list.</p>"
+        
+        
+        var image_name = 1
+        for item in items {
+            let a = item.value(forKey: "estimatedPrice") as! Float
+            
+            
+            let b = item.value(forKey: "realPrice") as! Float
+            
+            let c = item.value(forKey: "itemName") as! String
+            
+            
+            let d = item.value(forKey: "estimatedAmount") as! Float
+            
+            let e = item.value(forKey: "realAmount") as! Float
+            
+            
+            let f = item.value(forKey: "unit") as! String
+            
+            let g = item.value(forKey: "imageURL") as! String
+            
+            
+            
+            var image = getImageFromPath(sender: g)
+            
+            var newSize: CGSize
+            
+            newSize = CGSize(width: 200.0, height: 200.0)
+            image = self.resizeImage(image:image, targetSize: newSize)
+            let imageData = UIImageJPEGRepresentation(image, 1)
+            
+            mailComposerVC.addAttachmentData(imageData!, mimeType: "image/jpeg", fileName: String(image_name))
+            
+            image_name = image_name + 1
+            
+            message += "<p>"+"estimatedPrice: " + a.description + " realPrice: " + b.description + " itemName: " + c + " estimatedAmount: " + d.description
+                + " realAmount: " + e.description + " unit: " + f.description + "</p>"
+        }
+        message += "</body></html>"
+        mailComposerVC.setMessageBody(message, isHTML: true)
+        
+        return mailComposerVC
+    }
     
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    func showMailError(){
+        let alertTitle = NSLocalizedString("Could not send email", comment: "")
+        let alertDescription = NSLocalizedString("Your device cannot send email", comment: "")
+        let sendMailErrorAlert = UIAlertController(title: alertTitle, message: alertDescription, preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        
+    }
     func update_label_total() {
         
         var total = Float(0.0)
@@ -41,8 +143,8 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
         for Item in items{
             total += Float(Item.realAmount) * Float(Item.realPrice)
         }
-        
-        label_total.text = " Total Spent : " + total.description + " " + unitOfMoney! + " "
+        let alertTitle = NSLocalizedString("Total Spent :", comment: "")
+        label_total.text = alertTitle  + total.description + " " + unitOfMoney! + " "
     }
     
     // MARK: - Table view data source
@@ -74,14 +176,37 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
         realAmountString = item.realAmount.description + " " + item.unit
         
         realPriceString = item.realPrice.description + " " + unitOfMoney! + " "
+        let itemName = NSLocalizedString(" Item Name: ", comment: "")
+        let boughtAmount = NSLocalizedString(", Bought Amount: " , comment: "")
+        let boughtPreis = NSLocalizedString(", Bought Price: ", comment: "")
+        cell.itemDetails.text = itemName + item.itemName
+            + boughtAmount + realAmountString + " " + boughtPreis + realPriceString
         
-        cell.itemDetails.text = " Item Name: " + item.itemName
-            + ", Bought Amount: " + realAmountString + " " + ", Bought Price: " + realPriceString
-        
+        if !item.imageURL.isEmpty {
+            let image = getImageFromPath(sender: item.imageURL) as UIImage
+            
+            cell.recordItemImage.image = image
+        }
         return cell
     }
 
-    
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+            // Do whatever you want with the image
+        }
+        
+        return image
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

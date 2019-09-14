@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
@@ -14,14 +15,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
    
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var bannerView: GADBannerView!
     var profiles = [Profile]()
     
     var unitOfMoney: String?
     var password: String?
+    var email: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
         passwordTextfield.delegate = self
         
         passwordTextfield.autocorrectionType = .no
@@ -45,6 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             if profile.password == passwordTextfield.text {
                 unitOfMoney = profile.moneyUnit
                 password = profile.password
+                email = profile.email
                 return true
             }
         }
@@ -59,8 +67,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
                 return true
             }
             else {
+                let alertTitle = NSLocalizedString("No Match", comment: "")
+                let alertMessage = NSLocalizedString("Please Register", comment: "")
                 
-                let alertController = UIAlertController(title: "No Match", message: "Please Register", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+                
+                let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
                 
                 
                 // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
@@ -151,6 +162,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         
             homeViewController.unitOfMoney = unitOfMoney
             homeViewController.password = password
+            homeViewController.email = email
         
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
