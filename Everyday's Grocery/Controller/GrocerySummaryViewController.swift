@@ -8,7 +8,7 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -18,7 +18,8 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var label_total_spent: UILabel!
     
-    @IBOutlet weak var bannerView: GADBannerView!
+   
+    @IBOutlet weak var saveButton: UIButton!
     
     
     var items = [Item]()
@@ -31,12 +32,21 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
     var password: String?
     var real_items = [Item]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "images_1_.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        saveButton.layer.cornerRadius  = 5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+       
         
         self.tableView.separatorStyle = .none
 
@@ -167,7 +177,7 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
         let alertTitle3 = NSLocalizedString(", Bought Price: ", comment: "")
         cell.itemName.text =  alertTitle1 + item.itemName
             + alertTitle2 + realAmountString + " " + alertTitle3 + realPriceString
-        
+        cell.selectionStyle = .none
         return cell
     }
 

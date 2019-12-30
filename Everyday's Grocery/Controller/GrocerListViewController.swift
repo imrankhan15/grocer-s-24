@@ -8,7 +8,7 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 
 class GrocerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -19,19 +19,30 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var label_budget: UILabel!
   
     @IBOutlet weak var label_money_spent: UILabel!
-    @IBOutlet weak var bannerView: GADBannerView!
+   
+    @IBOutlet weak var btn_complete: UIButton!
     
     var items = [Item]()
     
     var unitOfMoney: String?
     var password: String?
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "images_1_.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        btn_complete.layer.cornerRadius = 5
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+       
         
         
         
@@ -134,7 +145,7 @@ class GrocerListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         cell.itemName.text =  alertTitle1 + item.itemName
        +   alertTitle2 + item.estimatedAmount.description + " " + item.unit + alertTitle3 + item.estimatedPrice.description + " " + unitOfMoney! + " " +  alertTitle4 + realAmountString + " " + alertTitle5  + realPriceString
-        
+        cell.selectionStyle = .none
         return cell
     }
     

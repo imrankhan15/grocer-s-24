@@ -8,11 +8,11 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var bannerView: GADBannerView!
+    
     @IBOutlet weak var realAmountTextField: UITextField!
     @IBOutlet weak var realPriceTextField: UITextField!
     
@@ -29,12 +29,11 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
     var unitOfMoney: String?
     var password: String?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+       
 
         realAmountTextField.delegate = self
         
@@ -89,9 +88,15 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
             unitTextField.text = item.unit
             
             if !item.imageURL.isEmpty {
-                let image = getImageFromPath(sender: item.imageURL) as UIImage
                 
-                imageView.image = image
+                if item.imageURL.range(of:"noImage") == nil {
+                    let image = getImageFromPath(sender: item.imageURL) as UIImage
+                    
+                    imageView.image = image
+                    
+                    
+                }
+               
             }
            
             

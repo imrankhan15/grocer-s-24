@@ -7,17 +7,23 @@
 //
 
 import UIKit
-import GoogleMobileAds
+
 
 class LogOutViewController: UIViewController {
 
-    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var registerButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+      
+        loginButton.layer.cornerRadius = 5
+        
+        registerButton.layer.cornerRadius = 5
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

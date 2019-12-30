@@ -8,7 +8,7 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class HomeListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -19,20 +19,32 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var button_gotogrocer: UIButton!
     
+    @IBOutlet weak var button_mainPage: UIButton!
     
     @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var bannerView: GADBannerView!
+   
     var items = [Item]()
 
     var unitOfMoney: String?
     var password: String?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "images_1_.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        button_mainPage.layer.cornerRadius = 5
+        button_gotogrocer.layer.cornerRadius = 5
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        
         navigationItem.leftBarButtonItem = editButtonItem
         let alertTitle = NSLocalizedString("Edit", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(HomeListTableViewController.editButtonPressed))
@@ -106,9 +118,23 @@ class HomeListTableViewController: UIViewController, UITableViewDelegate, UITabl
         cell.itemName.text =  alertTitle1 + item.itemName
         cell.estimatedAmount.text =  alertTitle2 + item.estimatedAmount.description + " " + item.unit + " "
         cell.estimatedPrice.text = alertTitle3 + item.estimatedPrice.description + " " + unitOfMoney! + " "
-        let image = getImageFromPath(sender: item.imageURL) as UIImage
         
-         cell.cellImage.image = image
+        if item.imageURL.range(of:"noImage") == nil {
+            let image = getImageFromPath(sender: item.imageURL) as UIImage
+            
+            
+                cell.cellImage.image = image
+                
+           
+        }
+        
+        
+                
+        
+            
+            
+       
+        
         
         return cell
     }

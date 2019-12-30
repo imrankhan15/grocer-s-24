@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleMobileAds
+
 import MessageUI
 
 class RecordItemViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
@@ -22,15 +22,23 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
     var email: String?
     @IBOutlet weak var label_total: UILabel!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet weak var bannerView: GADBannerView!
+   
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "images_1_.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        
         let alertTitle = NSLocalizedString("Mail Report", comment: "")
          navigationItem.rightBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(self.mailReport))
      
@@ -75,19 +83,26 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
             
             let g = item.value(forKey: "imageURL") as! String
             
-            
-            
-            var image = getImageFromPath(sender: g)
-            
-            var newSize: CGSize
-            
-            newSize = CGSize(width: 200.0, height: 200.0)
-            image = self.resizeImage(image:image, targetSize: newSize)
-            let imageData = UIImageJPEGRepresentation(image, 1)
-            
-            mailComposerVC.addAttachmentData(imageData!, mimeType: "image/jpeg", fileName: String(image_name))
-            
-            image_name = image_name + 1
+            if !g.isEmpty {
+                
+                if g.range(of:"noImage") == nil {
+                    var image = getImageFromPath(sender: g)
+                    
+                    var newSize: CGSize
+                    
+                    newSize = CGSize(width: 200.0, height: 200.0)
+                    image = self.resizeImage(image:image, targetSize: newSize)
+                    let imageData = UIImageJPEGRepresentation(image, 1)
+                    
+                    mailComposerVC.addAttachmentData(imageData!, mimeType: "image/jpeg", fileName: String(image_name))
+                    
+                    image_name = image_name + 1
+                    
+                    
+                }
+                
+            }
+           
             
             message += "<p>"+"estimatedPrice: " + a.description + " realPrice: " + b.description + " itemName: " + c + " estimatedAmount: " + d.description
                 + " realAmount: " + e.description + " unit: " + f.description + "</p>"
@@ -182,10 +197,18 @@ class RecordItemViewController: UIViewController, UITableViewDataSource, UITable
         cell.itemDetails.text = itemName + item.itemName
             + boughtAmount + realAmountString + " " + boughtPreis + realPriceString
         
+       
+        
         if !item.imageURL.isEmpty {
-            let image = getImageFromPath(sender: item.imageURL) as UIImage
             
-            cell.recordItemImage.image = image
+            if item.imageURL.range(of:"noImage") == nil {
+                let image = getImageFromPath(sender: item.imageURL) as UIImage
+                
+                cell.recordItemImage.image = image
+                
+                
+            }
+            
         }
         return cell
     }

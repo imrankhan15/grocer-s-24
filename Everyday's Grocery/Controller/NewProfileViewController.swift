@@ -8,11 +8,11 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var bannerView: GADBannerView!
+    
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var currencyTextField: UITextField!
@@ -27,9 +27,7 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+       saveButton.layer.cornerRadius = 5
         
         passwordTextField.delegate = self
         currencyTextField.delegate = self

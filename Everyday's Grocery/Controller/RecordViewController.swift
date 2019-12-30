@@ -8,13 +8,13 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
     
-    @IBOutlet weak var bannerView: GADBannerView!
+    
    
     var records = [Record]()
     var profile_records = [Record]()
@@ -24,12 +24,20 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var email: String?
     var dateTime: String?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "images_1_.png")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+       
         let alertTitle = NSLocalizedString("Edit", comment: "")
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: alertTitle, style: .plain, target: self, action: #selector(RecordViewController.editButtonPressed))

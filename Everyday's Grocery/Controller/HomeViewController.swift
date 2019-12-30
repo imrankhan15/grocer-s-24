@@ -7,21 +7,26 @@
 //
 
 import UIKit
-import GoogleMobileAds
+
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var btnOne: UIButton!
     
+    @IBOutlet weak var btnTwo: UIButton!
+    
+    @IBOutlet weak var btnThree: UIButton!
     var unitOfMoney: String?
     var password: String?
     var email: String?
-    @IBOutlet weak var bannerView: GADBannerView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        btnOne.layer.cornerRadius = 5
+        btnTwo.layer.cornerRadius = 5
+        btnThree.layer.cornerRadius = 5
+       
         
         // Do any additional setup after loading the view.
     }

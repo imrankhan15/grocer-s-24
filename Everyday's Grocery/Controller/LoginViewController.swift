@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import GoogleMobileAds
+
+
+
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
@@ -15,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
    
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var bannerView: GADBannerView!
+ 
     var profiles = [Profile]()
     
     var unitOfMoney: String?
@@ -25,10 +27,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+      
+       
         
+        
+        
+        loginButton.layer.cornerRadius = 5
+        
+
         passwordTextfield.delegate = self
         
         passwordTextfield.autocorrectionType = .no

@@ -8,7 +8,7 @@
 
 import UIKit
 import os.log
-import GoogleMobileAds
+
 
 class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, PhotoCaptureViewControllerDelegate {
      func PhotoCaptureViewControllerResponse(url: String) {
@@ -16,7 +16,7 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
     }
     
 
-    @IBOutlet weak var bannerView: GADBannerView!
+    
     @IBOutlet weak var itemNameTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var estimatedAmountTextField: UITextField!
@@ -28,6 +28,7 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
     
     var item: Item?
     
+    @IBOutlet weak var addPic: UIButton!
     var unitOfMoney: String?
     
     var password: String?
@@ -36,19 +37,33 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
     
     override func viewWillAppear(_ animated: Bool) {
         if !savedimageUrl.isEmpty {
-            let image = getImageFromPath(sender: savedimageUrl) as UIImage
             
-            imageView.image = image
+           
+            
+            if savedimageUrl.range(of:"noImage") == nil {
+                let image = getImageFromPath(sender: savedimageUrl) as UIImage
+                
+                imageView.image = image
+                
+                
+            }
         }
+        
+       
         updateSaveButtonState()
+        
+        
+            
+          
+            addPic.layer.cornerRadius = 5
+            
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-4598488303993049/8903355673"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        
         
         
         itemNameTextField.delegate = self
@@ -68,21 +83,41 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         // Set up views if editing an existing Item.
         
         if !savedimageUrl.isEmpty {
-            let image = getImageFromPath(sender: savedimageUrl) as UIImage
             
-            imageView.image = image
+            if savedimageUrl.range(of:"noImage") == nil {
+                let image = getImageFromPath(sender: savedimageUrl) as UIImage
+                
+                imageView.image = image
+                
+                
+            }
+            
         }
+        
+        
+        
+        
         if let item = item {
             navigationItem.title = item.itemName
             itemNameTextField.text = item.itemName
             estimatedPriceTestField.text = item.estimatedPrice.description
             estimatedAmountTextField.text = item.estimatedAmount.description
             unitTextField.text = item.unit
+            
+            
             if !item.imageURL.isEmpty {
-                let image = getImageFromPath(sender: item.imageURL) as UIImage
                 
-                imageView.image = image
+                if item.imageURL.range(of:"noImage") == nil {
+                    let image = getImageFromPath(sender: item.imageURL) as UIImage
+                    
+                    imageView.image = image
+                    
+                    
+                }
+                
             }
+            
+            
             
         }
         
@@ -169,7 +204,7 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         
         let text5 = moneyTextField.text ?? ""
         
-        saveButton.isEnabled = !text.isEmpty && !text2.isEmpty && !text3.isEmpty && !text4.isEmpty && !text5.isEmpty && !savedimageUrl.isEmpty
+        saveButton.isEnabled = !text.isEmpty && !text2.isEmpty && !text3.isEmpty && !text4.isEmpty && !text5.isEmpty 
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -228,9 +263,13 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         let realPrice = 0.0
         
         let realAmount = 0.0
-      
         
+        if(savedimageUrl == ""){
+            savedimageUrl = "noImage"
+        }
         item = Item(estimatedPrice: estimatedPrice, realPrice: Float(realPrice), itemName: itemName, estimatedAmount: estimatedAmount, realAmount: Float(realAmount), unit: unit, imageURL: savedimageUrl)
+            
+            print(item.debugDescription)
     }
  
 }
