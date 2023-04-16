@@ -14,3 +14,6 @@ Here is the horizontal architecture of this app. Every module has model and cont
 ![Screenshot 2023-04-16 at 11 18 29 PM](https://user-images.githubusercontent.com/7940474/232329518-87b6c535-3eec-4329-9012-22862f2cf399.png)
 
 
+
+
+
