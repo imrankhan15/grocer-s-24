@@ -1,5 +1,5 @@
 //
-//  RecordItemTableViewCell.swift
+//  RecordTableViewCell.swift
 //  Everyday's Grocery
 //
 //  Created by Muhammad Faisal Imran Khan on 1/10/18.
@@ -8,20 +8,15 @@
 
 import UIKit
 
-class RecordItemTableViewCell: UITableViewCell {
+class RecordTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var recordItemImage: UIImageView!
-    
-    @IBOutlet weak var itemDetails: UILabel!
+    @IBOutlet weak var record_dateTime: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

@@ -15,34 +15,21 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
     
     @IBOutlet weak var realAmountTextField: UITextField!
     @IBOutlet weak var realPriceTextField: UITextField!
-    
     @IBOutlet weak var unitTextField: UITextField!
-    
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
     @IBOutlet weak var moneyTextField: UITextField!
-    
     @IBOutlet weak var imageView: UIImageView!
     
     var item: Item?
-    
     var unitOfMoney: String?
     var password: String?
     
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        realAmountTextField.delegate = self
-        realPriceTextField.delegate = self
-        unitTextField.delegate = self
-        moneyTextField.delegate = self
         
-        realAmountTextField.autocorrectionType = .no
-        realPriceTextField.autocorrectionType = .no
-        unitTextField.autocorrectionType = .no
-        moneyTextField.autocorrectionType = .no
-        moneyTextField.text = unitOfMoney
-        
+        setUp()
         
         if let item = item {
             navigationItem.title = item.itemName
@@ -57,13 +44,9 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
             
             
             if item.realPrice < 0.1 {
-                
                 realPriceString = ""
-                
             } else {
-                
                 realPriceString = item.realPrice.description
-                
             }
             
             
@@ -83,73 +66,17 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
         
     }
 
-    func getImageFromPath(sender: String) -> UIImage {
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        
-        var image = UIImage()
-        if let dirPath          = paths.first
-        {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
-            image    = UIImage(contentsOfFile: imageURL.path)!
-            
-            return image
-            // Do whatever you want with the image
-        }
-        
-        return image
-    }
-    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
          dismiss(animated: true, completion: nil)
         
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    
-    private func updateSaveButtonState() {
-        
-        let realPrice = realPriceTextField.text ?? ""
-        
-        let realAmount = realAmountTextField.text ?? ""
-        
-        saveButton.isEnabled = !realPrice.isEmpty && !realAmount.isEmpty
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        saveButton.isEnabled = false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
-        
-    }
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
+ 
     
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+extension GrocerListItemViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         super.prepare(for: segue, sender: sender)
@@ -170,4 +97,85 @@ class GrocerListItemViewController: UIViewController, UITextFieldDelegate, UINav
         let imageurl = item?.imageURL
         item = Item(estimatedPrice: estimatedPrice!, realPrice: Float(realPrice), itemName: itemName!, estimatedAmount: estimatedAmount!, realAmount: Float(realAmount), unit: unit!, imageURL: imageurl!)
     }
+}
+
+extension GrocerListItemViewController {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+        
+    }
+}
+
+
+extension GrocerListItemViewController {
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+           
+        }
+        
+        return image
+    }
+    
+   
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    private func updateSaveButtonState() {
+        
+        let realPrice = realPriceTextField.text ?? ""
+        
+        let realAmount = realAmountTextField.text ?? ""
+        
+        saveButton.isEnabled = !realPrice.isEmpty && !realAmount.isEmpty
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
+    
+    func setUp(){
+        realAmountTextField.delegate = self
+        realPriceTextField.delegate = self
+        unitTextField.delegate = self
+        moneyTextField.delegate = self
+        
+        realAmountTextField.autocorrectionType = .no
+        realPriceTextField.autocorrectionType = .no
+        unitTextField.autocorrectionType = .no
+        moneyTextField.autocorrectionType = .no
+        moneyTextField.text = unitOfMoney
+    }
+}
+
+
+extension GrocerListItemViewController {
+    
+    
 }

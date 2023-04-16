@@ -83,6 +83,7 @@ class Item: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         
         // The name is required. If we cannot decode a name string, the initializer should fail.
+        
         guard let itemName = aDecoder.decodeObject(forKey: PropertyKey.itemName) as? String else {
             os_log("Unable to decode the name for a Item object.", log: OSLog.default, type: .debug)
             return nil
@@ -108,7 +109,7 @@ class Item: NSObject, NSCoding {
             return nil
         }
         
-        // Must call designated initializer.
+
         self.init(estimatedPrice: estimatedPrice, realPrice: realPrice, itemName: itemName, estimatedAmount: estimatedAmount, realAmount: realAmount, unit: unit, imageURL: imageURL)
         
     }

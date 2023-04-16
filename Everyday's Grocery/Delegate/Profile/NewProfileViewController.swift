@@ -11,8 +11,7 @@ import os.log
 
 
 class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
-    
-    
+  
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,8 +20,47 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
     var profiles = [Profile]()
     var profile: Profile?
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        setUp()
+        if let savedProfiles = loadProfiles() {
+            profiles += savedProfiles
+        }
+        
+    }
+    
+    @IBAction func done_action(_ sender: UIButton) {
+        
+        if isMatched(){
+            alertForMatched()
+        }
+        else {
+            alertForNotMatched()
+        }
+    }
+
+}
+
+extension NewProfileViewController{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+    }
+    
+}
+extension NewProfileViewController{
+    func setUp(){
         saveButton.layer.cornerRadius = 5
         passwordTextField.delegate = self
         currencyTextField.delegate = self
@@ -31,11 +69,6 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
         currencyTextField.autocorrectionType = .no
         emailTextField.autocorrectionType = .no
         updateSaveButtonState()
-        
-        if let savedProfiles = loadProfiles() {
-            profiles += savedProfiles
-        }
-        
     }
     
     private func updateSaveButtonState() {
@@ -70,59 +103,37 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
     }
     
     
-    @IBAction func done_action(_ sender: UIButton) {
+   
+    
+    func alertForMatched(){
+        let alertTitle = NSLocalizedString("Password Already Exists", comment: "")
+        let alertMessage = NSLocalizedString("Please Select Another Password", comment: "")
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
         
-        if isMatched(){
-            let alertTitle = NSLocalizedString("Password Already Exists", comment: "")
-            let alertMessage = NSLocalizedString("Please Select Another Password", comment: "")
-            let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
-            
-            
-            
-            // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
-            
-            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-                (result : UIAlertAction) -> Void in
-                print("OK")
-            }
-            
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func alertForNotMatched(){
+        let password = passwordTextField.text
+        let currency = currencyTextField.text
+        let email = emailTextField.text
+        
+        profile = Profile(password: password!, moneyUnit: currency!, email: email!)
+        
+        profiles.append(profile!)
+        saveProfiles()
+        if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
         }
         else {
-            
-            let password = passwordTextField.text
-            let currency = currencyTextField.text
-            let email = emailTextField.text
-            
-            profile = Profile(password: password!, moneyUnit: currency!, email: email!)
-            
-            profiles.append(profile!)
-            saveProfiles()
-            if let owningNavigationController = navigationController{
-                owningNavigationController.popViewController(animated: true)
-            }
-            else {
-                fatalError("The LoginViewController is not inside a navigation controller.")
-            }           
+            fatalError("The LoginViewController is not inside a navigation controller.")
         }
-        
-        
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        saveButton.isEnabled = false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
     }
     
     private func saveProfiles() {
@@ -133,5 +144,4 @@ class NewProfileViewController: UIViewController, UITextFieldDelegate, UINavigat
             os_log("Failed to save meals...", log: OSLog.default, type: .error)
         }
     }
-    
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		190437A4202585B2009136CA /* images_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 190437A3202585B2009136CA /* images_icon.png */; };
 		190437A620258787009136CA /* images_1_.png in Resources */ = {isa = PBXBuildFile; fileRef = 190437A520258787009136CA /* images_1_.png */; };
+		192EC1F829EAD30100CD7550 /* LogInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC1F729EAD30100CD7550 /* LogInViewControllerTests.swift */; };
 		193AFCDD200F1A5E00D5CD1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */; };
 		1966641D22DB091400BAFC5A /* PhotoCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1966641C22DB091400BAFC5A /* PhotoCaptureViewController.swift */; };
 		1966641F22DB0BD600BAFC5A /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 1966641E22DB0BD500BAFC5A /* tick.png */; };
@@ -18,12 +19,20 @@
 		1987AB191FF692600032C710 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1987AB181FF692600032C710 /* Item.swift */; };
 		1987AB1B1FF695870032C710 /* HomeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */; };
 		1987AB1D1FF699E90032C710 /* HomeListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */; };
+		198C60F629EB2717005D6EE4 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60F529EB2717005D6EE4 /* HomeViewControllerTests.swift */; };
+		198C60F829EB29B5005D6EE4 /* RecordItemViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60F729EB29B5005D6EE4 /* RecordItemViewControllerTests.swift */; };
+		198C60FA29EB2F20005D6EE4 /* HomeListItemViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60F929EB2F20005D6EE4 /* HomeListItemViewControllerTests.swift */; };
+		198C60FC29EB3277005D6EE4 /* HomeListTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60FB29EB3277005D6EE4 /* HomeListTableViewControllerTests.swift */; };
+		198C60FE29EB3477005D6EE4 /* GrocerListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60FD29EB3477005D6EE4 /* GrocerListViewControllerTests.swift */; };
+		198C610029EB4247005D6EE4 /* GroceryListItemViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C60FF29EB4247005D6EE4 /* GroceryListItemViewControllerTests.swift */; };
+		198C610229EB4308005D6EE4 /* GrocerySummaryVIewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C610129EB4308005D6EE4 /* GrocerySummaryVIewControllerTests.swift */; };
+		198C610429EB458B005D6EE4 /* PhotoCaptureViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C610329EB458B005D6EE4 /* PhotoCaptureViewControllerTests.swift */; };
+		198D793D29EB19070092AD13 /* RecordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198D793C29EB19070092AD13 /* RecordViewControllerTests.swift */; };
 		199204441FF23B68007A9FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199204431FF23B68007A9FCA /* AppDelegate.swift */; };
 		199204491FF23B68007A9FCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199204471FF23B68007A9FCA /* Main.storyboard */; };
 		1992044C1FF23B68007A9FCA /* Everyday_s_Grocery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1992044A1FF23B68007A9FCA /* Everyday_s_Grocery.xcdatamodeld */; };
 		1992044E1FF23B68007A9FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1992044D1FF23B68007A9FCA /* Assets.xcassets */; };
 		199204511FF23B68007A9FCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1992044F1FF23B68007A9FCA /* LaunchScreen.storyboard */; };
-		1992045C1FF23B68007A9FCA /* Everyday_s_GroceryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992045B1FF23B68007A9FCA /* Everyday_s_GroceryTests.swift */; };
 		19A3C67D1FFFBF8F008E9042 /* GrocerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */; };
 		19A3C67F1FFFBFA8008E9042 /* GrocerListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */; };
 		19A3C6811FFFBFD1008E9042 /* GrocerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A3C6801FFFBFD1008E9042 /* GrocerListTableViewCell.swift */; };
@@ -52,6 +61,7 @@
 /* Begin PBXFileReference section */
 		190437A3202585B2009136CA /* images_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images_icon.png; sourceTree = "<group>"; };
 		190437A520258787009136CA /* images_1_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images_1_.png; sourceTree = "<group>"; };
+		192EC1F729EAD30100CD7550 /* LogInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerTests.swift; sourceTree = "<group>"; };
 		193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1966641C22DB091400BAFC5A /* PhotoCaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureViewController.swift; sourceTree = "<group>"; };
 		1966641E22DB0BD500BAFC5A /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
@@ -62,6 +72,15 @@
 		1987AB181FF692600032C710 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeListTableViewCell.swift; sourceTree = "<group>"; };
 		1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeListItemViewController.swift; sourceTree = "<group>"; };
+		198C60F529EB2717005D6EE4 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
+		198C60F729EB29B5005D6EE4 /* RecordItemViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItemViewControllerTests.swift; sourceTree = "<group>"; };
+		198C60F929EB2F20005D6EE4 /* HomeListItemViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemViewControllerTests.swift; sourceTree = "<group>"; };
+		198C60FB29EB3277005D6EE4 /* HomeListTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListTableViewControllerTests.swift; sourceTree = "<group>"; };
+		198C60FD29EB3477005D6EE4 /* GrocerListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrocerListViewControllerTests.swift; sourceTree = "<group>"; };
+		198C60FF29EB4247005D6EE4 /* GroceryListItemViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListItemViewControllerTests.swift; sourceTree = "<group>"; };
+		198C610129EB4308005D6EE4 /* GrocerySummaryVIewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrocerySummaryVIewControllerTests.swift; sourceTree = "<group>"; };
+		198C610329EB458B005D6EE4 /* PhotoCaptureViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureViewControllerTests.swift; sourceTree = "<group>"; };
+		198D793C29EB19070092AD13 /* RecordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewControllerTests.swift; sourceTree = "<group>"; };
 		199204401FF23B68007A9FCA /* Everyday's Grocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Everyday's Grocery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		199204431FF23B68007A9FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		199204481FF23B68007A9FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,7 +89,6 @@
 		199204501FF23B68007A9FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		199204521FF23B68007A9FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		199204571FF23B68007A9FCA /* Everyday's GroceryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Everyday's GroceryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1992045B1FF23B68007A9FCA /* Everyday_s_GroceryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Everyday_s_GroceryTests.swift; sourceTree = "<group>"; };
 		1992045D1FF23B68007A9FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrocerListViewController.swift; sourceTree = "<group>"; };
 		19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrocerListItemViewController.swift; sourceTree = "<group>"; };
@@ -122,18 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				199204431FF23B68007A9FCA /* AppDelegate.swift */,
+				19A3726C29EB760C00DB8841 /* Profile */,
+				19A3726D29EB763900DB8841 /* Item */,
+				19A3726E29EB767600DB8841 /* Record */,
 			);
 			path = Delegate;
-			sourceTree = "<group>";
-		};
-		197D58D7222BB91E004E0638 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				19DDB8702007316900DD5F1A /* Profile.swift */,
-				1987AB181FF692600032C710 /* Item.swift */,
-				19B0B577200345E6007F70E7 /* Record.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		197D58D8222BB92D004E0638 /* View */ = {
@@ -146,30 +157,6 @@
 				199204471FF23B68007A9FCA /* Main.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		197D58D9222BB933004E0638 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1981298C2006095B0071C546 /* RecordItemTableViewCell.swift */,
-				19D9B5D42005E861007572E9 /* RecordTableViewCell.swift */,
-				1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */,
-				19A3C6801FFFBFD1008E9042 /* GrocerListTableViewCell.swift */,
-				19F8127A2003371D00FE19A9 /* GrocerySummaryTableViewCell.swift */,
-				19DDB87420073A0800DD5F1A /* LoginViewController.swift */,
-				1985BDCC200F7A0100A2CD3A /* LogOutViewController.swift */,
-				193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */,
-				19DDB8722007343D00DD5F1A /* NewProfileViewController.swift */,
-				19D9B5D82005EB8D007572E9 /* RecordItemViewController.swift */,
-				19D9B5D62005E8BE007572E9 /* RecordViewController.swift */,
-				1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */,
-				1987AB161FF692000032C710 /* HomeListTableViewController.swift */,
-				19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */,
-				19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */,
-				19F81278200336DB00FE19A9 /* GrocerySummaryViewController.swift */,
-				1966641C22DB091400BAFC5A /* PhotoCaptureViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		199204371FF23B68007A9FCA = {
@@ -194,9 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				196AE9C52776F40700FC6CB4 /* Delegate */,
-				197D58D7222BB91E004E0638 /* Model */,
 				197D58D8222BB92D004E0638 /* View */,
-				197D58D9222BB933004E0638 /* Controller */,
 				199204521FF23B68007A9FCA /* Info.plist */,
 				1992044A1FF23B68007A9FCA /* Everyday_s_Grocery.xcdatamodeld */,
 				19FF15E7231291F900B75F42 /* Localizable.strings */,
@@ -207,10 +192,60 @@
 		1992045A1FF23B68007A9FCA /* Everyday's GroceryTests */ = {
 			isa = PBXGroup;
 			children = (
-				1992045B1FF23B68007A9FCA /* Everyday_s_GroceryTests.swift */,
 				1992045D1FF23B68007A9FCA /* Info.plist */,
+				192EC1F729EAD30100CD7550 /* LogInViewControllerTests.swift */,
+				198D793C29EB19070092AD13 /* RecordViewControllerTests.swift */,
+				198C60F529EB2717005D6EE4 /* HomeViewControllerTests.swift */,
+				198C60F729EB29B5005D6EE4 /* RecordItemViewControllerTests.swift */,
+				198C60F929EB2F20005D6EE4 /* HomeListItemViewControllerTests.swift */,
+				198C60FB29EB3277005D6EE4 /* HomeListTableViewControllerTests.swift */,
+				198C60FD29EB3477005D6EE4 /* GrocerListViewControllerTests.swift */,
+				198C60FF29EB4247005D6EE4 /* GroceryListItemViewControllerTests.swift */,
+				198C610129EB4308005D6EE4 /* GrocerySummaryVIewControllerTests.swift */,
+				198C610329EB458B005D6EE4 /* PhotoCaptureViewControllerTests.swift */,
 			);
 			path = "Everyday's GroceryTests";
+			sourceTree = "<group>";
+		};
+		19A3726C29EB760C00DB8841 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				19DDB8702007316900DD5F1A /* Profile.swift */,
+				19DDB87420073A0800DD5F1A /* LoginViewController.swift */,
+				1985BDCC200F7A0100A2CD3A /* LogOutViewController.swift */,
+				19DDB8722007343D00DD5F1A /* NewProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		19A3726D29EB763900DB8841 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				1987AB181FF692600032C710 /* Item.swift */,
+				193AFCDC200F1A5E00D5CD1A /* HomeViewController.swift */,
+				1987AB1A1FF695870032C710 /* HomeListTableViewCell.swift */,
+				19A3C6801FFFBFD1008E9042 /* GrocerListTableViewCell.swift */,
+				19F8127A2003371D00FE19A9 /* GrocerySummaryTableViewCell.swift */,
+				1987AB1C1FF699E90032C710 /* HomeListItemViewController.swift */,
+				1987AB161FF692000032C710 /* HomeListTableViewController.swift */,
+				19A3C67C1FFFBF8F008E9042 /* GrocerListViewController.swift */,
+				19A3C67E1FFFBFA8008E9042 /* GrocerListItemViewController.swift */,
+				19F81278200336DB00FE19A9 /* GrocerySummaryViewController.swift */,
+				1966641C22DB091400BAFC5A /* PhotoCaptureViewController.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		19A3726E29EB767600DB8841 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				19B0B577200345E6007F70E7 /* Record.swift */,
+				1981298C2006095B0071C546 /* RecordItemTableViewCell.swift */,
+				19D9B5D42005E861007572E9 /* RecordTableViewCell.swift */,
+				19D9B5D82005EB8D007572E9 /* RecordItemViewController.swift */,
+				19D9B5D62005E8BE007572E9 /* RecordViewController.swift */,
+			);
+			path = Record;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,12 +298,12 @@
 				TargetAttributes = {
 					1992043F1FF23B68007A9FCA = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5WY7K834X3;
+						DevelopmentTeam = LQ84K7HVH4;
 						ProvisioningStyle = Automatic;
 					};
 					199204561FF23B68007A9FCA = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5WY7K834X3;
+						DevelopmentTeam = LQ84K7HVH4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1992043F1FF23B68007A9FCA;
 					};
@@ -353,7 +388,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1992045C1FF23B68007A9FCA /* Everyday_s_GroceryTests.swift in Sources */,
+				198C60FA29EB2F20005D6EE4 /* HomeListItemViewControllerTests.swift in Sources */,
+				198D793D29EB19070092AD13 /* RecordViewControllerTests.swift in Sources */,
+				192EC1F829EAD30100CD7550 /* LogInViewControllerTests.swift in Sources */,
+				198C610029EB4247005D6EE4 /* GroceryListItemViewControllerTests.swift in Sources */,
+				198C60F829EB29B5005D6EE4 /* RecordItemViewControllerTests.swift in Sources */,
+				198C610229EB4308005D6EE4 /* GrocerySummaryVIewControllerTests.swift in Sources */,
+				198C610429EB458B005D6EE4 /* PhotoCaptureViewControllerTests.swift in Sources */,
+				198C60FE29EB3477005D6EE4 /* GrocerListViewControllerTests.swift in Sources */,
+				198C60F629EB2717005D6EE4 /* HomeViewControllerTests.swift in Sources */,
+				198C60FC29EB3277005D6EE4 /* HomeListTableViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,12 +486,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -488,10 +533,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -501,13 +547,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WY7K834X3;
+				DEVELOPMENT_TEAM = LQ84K7HVH4;
 				INFOPLIST_FILE = "Everyday's Grocery/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-Grocery";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-Grocery.m";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -516,13 +562,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WY7K834X3;
+				DEVELOPMENT_TEAM = LQ84K7HVH4;
 				INFOPLIST_FILE = "Everyday's Grocery/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-Grocery";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-Grocery.m";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -532,12 +578,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 5WY7K834X3;
+				DEVELOPMENT_TEAM = LQ84K7HVH4;
 				INFOPLIST_FILE = "Everyday's GroceryTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-GroceryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Everyday's Grocery.app/Everyday's Grocery";
 			};
 			name = Debug;
@@ -547,12 +593,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 5WY7K834X3;
+				DEVELOPMENT_TEAM = LQ84K7HVH4;
 				INFOPLIST_FILE = "Everyday's GroceryTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Everyday-s-GroceryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Everyday's Grocery.app/Everyday's Grocery";
 			};
 			name = Release;

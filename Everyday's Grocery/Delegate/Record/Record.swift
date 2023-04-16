@@ -59,13 +59,12 @@ class Record: NSObject, NSCoding {
         aCoder.encode(dateTime, forKey: PropertyKey.dateTime)
         aCoder.encode(items, forKey: PropertyKey.items)
         aCoder.encode(password, forKey: PropertyKey.password)
-        
-        
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         
         // The name is required. If we cannot decode a name string, the initializer should fail.
+        
         guard let dateTime = aDecoder.decodeObject(forKey: PropertyKey.dateTime) as? String else {
             os_log("Unable to decode the name for a Item object.", log: OSLog.default, type: .debug)
             return nil
@@ -82,12 +81,8 @@ class Record: NSObject, NSCoding {
         }
         
         // Because photo is an optional property of Meal, just use conditional cast.
-        
-        
-        
-        // Must call designated initializer.
+         
         self.init(dateTime: dateTime, items: items, password: password)
-        
     }
     
     

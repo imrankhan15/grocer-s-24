@@ -30,20 +30,12 @@ class PhotoCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var image = UIImage()
     var captureSession = AVCaptureSession()
     var savedImageUrl = String()
-    
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
+
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.tintColor = UIColor.black
+        setup()
         
         imageView.isHidden = true
         previewLayer = AVCaptureVideoPreviewLayer()
@@ -54,11 +46,6 @@ class PhotoCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
         self.captureSession.sessionPreset = AVCaptureSession.Preset.photo
         let inputDevice = AVCaptureDevice.default(for: AVMediaType.video)
         stillImageOutput = AVCapturePhotoOutput()
-        button_accept.isHidden = true
-        button_retake.isHidden = true
-        imageView.isHidden = true
-        imgTick.isHidden = false
-        lbl_text.isHidden = false
         
         if let input = try? AVCaptureDeviceInput(device: inputDevice!) {
             if (self.captureSession.canAddInput(input)) {
@@ -104,6 +91,54 @@ class PhotoCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
         
     }
     
+   
+    
+
+    @IBAction func button_action(_ sender: UIButton) {
+        
+        if (!image.isEqual(nil)){
+            let viewImage = image as UIImage
+            let imageName = saveImageDataWithImage(viewImage)
+            savedImageUrl = imageName
+            self.delegate?.PhotoCaptureViewControllerResponse(url: savedImageUrl)
+            self.navigationController?.popViewController(animated: true)
+            
+        }
+    }
+    
+   
+   
+    
+    @IBAction func button_retake(_ sender: UIButton) {
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = viewBackground.bounds
+        viewBackground.layer.insertSublayer(previewLayer, at: 0)
+        captureSession.startRunning()
+        button_accept.isHidden = true
+        button_retake.isHidden = true
+        imageView.isHidden = true
+        imgTick.isHidden = false
+        lbl_text.isHidden = false
+    }
+    
+  
+}
+
+extension PhotoCaptureViewController {
+    
+    
+    func setup() {
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        
+      
+        button_accept.isHidden = true
+        button_retake.isHidden = true
+        imageView.isHidden = true
+        imgTick.isHidden = false
+        lbl_text.isHidden = false
+    }
+    
     func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
         if let error = error {
@@ -127,18 +162,14 @@ class PhotoCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
         button_retake.isHidden = false
         lbl_text.isHidden = true
     }
-    
 
-    @IBAction func button_action(_ sender: UIButton) {
-        
-        if (!image.isEqual(nil)){
-            let viewImage = image as UIImage
-            let imageName = saveImageDataWithImage(viewImage)
-            savedImageUrl = imageName
-            self.delegate?.PhotoCaptureViewControllerResponse(url: savedImageUrl)
-            self.navigationController?.popViewController(animated: true)
-            
-        }
+}
+extension PhotoCaptureViewController {
+    
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
     
     func saveImageDataWithImage(_ sender: UIImage) -> String{
@@ -154,24 +185,13 @@ class PhotoCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
         
     }
     
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
-    
-    @IBAction func button_retake(_ sender: UIButton) {
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = viewBackground.bounds
-        viewBackground.layer.insertSublayer(previewLayer, at: 0)
-        captureSession.startRunning()
-        button_accept.isHidden = true
-        button_retake.isHidden = true
-        imageView.isHidden = true
-        imgTick.isHidden = false
-        lbl_text.isHidden = false
-    }
-    
-
 }

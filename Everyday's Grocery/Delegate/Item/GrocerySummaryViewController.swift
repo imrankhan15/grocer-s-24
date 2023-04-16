@@ -52,14 +52,7 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     
-    private func loadItems() -> [Item]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Item.ArchiveURL.path) as? [Item]
-    }
-    
-    private func loadRecords() -> [Record]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Record.ArchiveURL.path) as? [Record]
-    }
- 
+  
     @IBAction func saveAndNew(_ sender: UIButton) {
         
         if real_items.count > 0{
@@ -81,8 +74,35 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
         }
         
     }
-   
-   
+
+
+//MARK: Helper methods
+    
+    private func loadItems() -> [Item]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Item.ArchiveURL.path) as? [Item]
+    }
+    
+    private func loadRecords() -> [Record]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Record.ArchiveURL.path) as? [Record]
+    }
+ 
+    
+    func update_label_money_spent() {
+        
+        var total = Float(0.0)
+        
+        for Item in items{
+            total += Float(Item.realAmount) * Float(Item.realPrice)
+        }
+        let alertTitle = NSLocalizedString(" Money Spent : ", comment: "")
+        label_total_spent.text =  alertTitle + total.description + " " +   " taka "
+    }//unitOfMoney!
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     private func saveRecord() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(records, toFile: Record.ArchiveURL.path)
         if isSuccessfulSave {
@@ -100,24 +120,21 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
             os_log("Failed to save meals...", log: OSLog.default, type: .error)
         }
     }
+    
+    func getItemString(item: Item) -> String {
+        var realAmountString = ""
+        var realPriceString = ""
+        realAmountString = item.realAmount.description + " " + item.unit
+        realPriceString = item.realPrice.description + " " + "taka " + " "//!unitOfMoney!
+        let alertTitle1 = NSLocalizedString(" Item Name: ", comment: "")
+        let alertTitle2 = NSLocalizedString(", Bought Amount: ", comment: "")
+        let alertTitle3 = NSLocalizedString(", Bought Price: ", comment: "")
+        let return_string =  alertTitle1 + item.itemName
+            + alertTitle2 + realAmountString + " " + alertTitle3 + realPriceString
+        
+        return return_string
+    }
 
-    
-    func update_label_money_spent() {
-        
-        var total = Float(0.0)
-        
-        for Item in items{
-            total += Float(Item.realAmount) * Float(Item.realPrice)
-        }
-        let alertTitle = NSLocalizedString(" Money Spent : ", comment: "")
-        label_total_spent.text =  alertTitle + total.description + " " + unitOfMoney! + " "
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 //MARK: table view
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -137,21 +154,10 @@ class GrocerySummaryViewController: UIViewController, UITableViewDataSource, UIT
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? GrocerySummaryTableViewCell  else {
             fatalError("The dequeued cell is not an instance of GrocerySummaryTableViewCell.")
         }
-        
         let item = real_items[indexPath.row]
-        
-        var realAmountString = ""
-        
-        var realPriceString = ""
-        realAmountString = item.realAmount.description + " " + item.unit
-        
-        realPriceString = item.realPrice.description + " " + unitOfMoney! + " "
-        let alertTitle1 = NSLocalizedString(" Item Name: ", comment: "")
-        let alertTitle2 = NSLocalizedString(", Bought Amount: ", comment: "")
-        let alertTitle3 = NSLocalizedString(", Bought Price: ", comment: "")
-        cell.itemName.text =  alertTitle1 + item.itemName
-            + alertTitle2 + realAmountString + " " + alertTitle3 + realPriceString
+        cell.itemName.text =  getItemString(item: item)
         cell.selectionStyle = .none
         return cell
     }
 }
+

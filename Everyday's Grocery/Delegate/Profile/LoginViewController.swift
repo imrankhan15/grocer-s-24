@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
     var unitOfMoney: String?
     var password: String?
     var email: String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton.layer.cornerRadius = 5
@@ -27,69 +27,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             profiles += savedProfiles
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    func isMatched() -> Bool {
-        for profile in profiles {
-            if profile.password == passwordTextfield.text {
-                unitOfMoney = profile.moneyUnit
-                password = profile.password
-                email = profile.email
-                return true
-            }
-        }
-        return false
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "ShowHome" {
-            if isMatched(){
-                return true
-            }
-            else {
-                let alertTitle = NSLocalizedString("No Match", comment: "")
-                let alertMessage = NSLocalizedString("Please Register", comment: "")
-                
-                
-                let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
-                
-                
-                // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
-                
-                let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-                    (result : UIAlertAction) -> Void in
-                    print("OK")
-                }
-                
-                
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-                
-                
-                return false
-            }
-        }
-        
-        // by default, transition
-        return true
 
-    }
-
+   
     @IBAction func action_logIn(_ sender: UIButton) {
     }
     
-    private func updateLoginButtonState() {
-        let passwordText = passwordTextfield.text ?? ""
-        loginButton.isEnabled = !passwordText.isEmpty
-    }
-    
-    private func loadProfiles() -> [Profile]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Profile.ArchiveURL.path) as? [Profile]
-    }
 
+}
+
+extension LoginViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -104,15 +50,78 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
         
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+   
+}
+
+extension LoginViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
+    func isMatched() -> Bool {
+        for profile in profiles {
+            if profile.password == passwordTextfield.text {
+                unitOfMoney = profile.moneyUnit
+                password = profile.password
+                email = profile.email
+                return true
+            }
+        }
+        return false
+    }
     
-    // MARK: - Navigation
+    
+    private func loadProfiles() -> [Profile]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Profile.ArchiveURL.path) as? [Profile]
+    }
+    
+    private func updateLoginButtonState() {
+        let passwordText = passwordTextfield.text ?? ""
+        loginButton.isEnabled = !passwordText.isEmpty
+    }
+    
+    
+    func alertForNoMatch() -> Bool{
+        let alertTitle = NSLocalizedString("No Match", comment: "")
+        let alertMessage = NSLocalizedString("Please Register", comment: "")
+        
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        
+    
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+        }
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+        
+        return false
+    }
+}
+extension LoginViewController {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "ShowHome" {
+            if self.isMatched(){
+                return true
+            }
+            else {
+                return alertForNoMatch()
+            }
+        }
+        
+        // by default, transition
+        return true
 
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -130,4 +139,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UINavigationCo
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
        }
     }
+
 }
+

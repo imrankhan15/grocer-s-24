@@ -11,9 +11,6 @@ import os.log
 
 
 class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, PhotoCaptureViewControllerDelegate {
-    func PhotoCaptureViewControllerResponse(url: String) {
-        savedimageUrl = url
-    }
     
     
     
@@ -23,17 +20,15 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
     @IBOutlet weak var estimatedPriceTestField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var unitTextField: UITextField!
-    
     @IBOutlet weak var moneyTextField: UITextField!
+    @IBOutlet weak var addPic: UIButton!
     
+    var unitOfMoney: String?
+    var password: String?
+    var savedimageUrl = String()
     var item: Item?
     
-    @IBOutlet weak var addPic: UIButton!
-    var unitOfMoney: String?
     
-    var password: String?
-    
-    var savedimageUrl = String()
     
     override func viewWillAppear(_ animated: Bool) {
         if !savedimageUrl.isEmpty {
@@ -46,23 +41,11 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         addPic.layer.cornerRadius = 5
     }
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemNameTextField.delegate = self
-        estimatedPriceTestField.delegate = self
-        estimatedAmountTextField.delegate = self
-        unitTextField.delegate = self
-        moneyTextField.delegate = self
-        
-        itemNameTextField.autocorrectionType = .no
-        estimatedPriceTestField.autocorrectionType = .no
-        estimatedAmountTextField.autocorrectionType = .no
-        unitTextField.autocorrectionType = .no
-        moneyTextField.autocorrectionType = .no
-        
-        moneyTextField.text = unitOfMoney
-        self.automaticallyAdjustsScrollViewInsets = false
-        // Set up views if editing an existing Item.
+       
+        startUp()
         
         if !savedimageUrl.isEmpty {
             
@@ -89,44 +72,7 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         updateSaveButtonState()
     }
     
-    func getImageFromPath(sender: String) -> UIImage {
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        
-        var image = UIImage()
-        if let dirPath          = paths.first
-        {
-            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
-            image    = UIImage(contentsOfFile: imageURL.path)!
-            
-            return image
-            // Do whatever you want with the image
-        }
-        
-        return image
-    }
     
-    
-    func isModal() -> Bool {
-        if self.presentingViewController != nil {
-            return true
-        }
-        
-        return false
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    private var wasPushed: Bool {
-        guard let vc = navigationController?.viewControllers.first, vc == self else {
-            return true
-        }
-        
-        return false
-    }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         let isPresentingInAddltemMode = wasPushed
@@ -140,43 +86,11 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
             fatalError("The ItemViewController is not inside a navigation controller.")
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    private func updateSaveButtonState() {
-        
-        let itemName = itemNameTextField.text ?? ""
-        
-        let estimatedPrice = estimatedPriceTestField.text ?? ""
-        
-        let estimatedAmount = estimatedAmountTextField.text ?? ""
-        
-        let unitText = unitTextField.text ?? ""
-        
-        let moneyText = moneyTextField.text ?? ""
-        
-        saveButton.isEnabled = !itemName.isEmpty && !estimatedPrice.isEmpty && !estimatedAmount.isEmpty && !unitText.isEmpty && !moneyText.isEmpty
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        saveButton.isEnabled = false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
-        
-    }
-    // MARK: - Navigation
-    
+
+}
+
+
+extension HomeListItemViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -217,5 +131,105 @@ class HomeListItemViewController: UIViewController, UITextFieldDelegate, UINavig
         }
         
     }
+}
+
+extension HomeListItemViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
     
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+        
+    }
+}
+
+extension HomeListItemViewController {
+    func PhotoCaptureViewControllerResponse(url: String) {
+        savedimageUrl = url
+    }
+    
+    
+    func startUp(){
+        itemNameTextField.delegate = self
+        estimatedPriceTestField.delegate = self
+        estimatedAmountTextField.delegate = self
+        unitTextField.delegate = self
+        moneyTextField.delegate = self
+        
+        itemNameTextField.autocorrectionType = .no
+        estimatedPriceTestField.autocorrectionType = .no
+        estimatedAmountTextField.autocorrectionType = .no
+        unitTextField.autocorrectionType = .no
+        moneyTextField.autocorrectionType = .no
+        
+        moneyTextField.text = unitOfMoney
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+    func getImageFromPath(sender: String) -> UIImage {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        var image = UIImage()
+        if let dirPath          = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(sender)
+            image    = UIImage(contentsOfFile: imageURL.path)!
+            
+            return image
+          
+        }
+        
+        return image
+    }
+    
+    
+    func isModal() -> Bool {
+        if self.presentingViewController != nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    private var wasPushed: Bool {
+        guard let vc = navigationController?.viewControllers.first, vc == self else {
+            return true
+        }
+        
+        return false
+    }
+    private func updateSaveButtonState() {
+        
+        let itemName = itemNameTextField.text ?? ""
+        
+        let estimatedPrice = estimatedPriceTestField.text ?? ""
+        
+        let estimatedAmount = estimatedAmountTextField.text ?? ""
+        
+        let unitText = unitTextField.text ?? ""
+        
+        let moneyText = moneyTextField.text ?? ""
+        
+        saveButton.isEnabled = !itemName.isEmpty && !estimatedPrice.isEmpty && !estimatedAmount.isEmpty && !unitText.isEmpty && !moneyText.isEmpty
+    }
 }

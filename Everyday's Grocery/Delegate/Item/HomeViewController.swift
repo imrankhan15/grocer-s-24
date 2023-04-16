@@ -27,11 +27,9 @@ class HomeViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func unwindToHomeView(segue: UIStoryboardSegue) {
-        //nothing goes here
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -10,7 +10,6 @@ import UIKit
 import os.log
 
 class Profile: NSObject, NSCoding {
-    
     var password: String
     var moneyUnit: String
     var email: String
@@ -26,15 +25,11 @@ class Profile: NSObject, NSCoding {
         static let password = "password"
         static let moneyUnit = "moneyUnit"
         static let email = "email"
-        
-        
     }
     
     //MARK: Initialization
     
     init?(password: String, moneyUnit: String, email: String) {
-        
-        
         guard !password.isEmpty else {
             return nil
         }
@@ -49,8 +44,7 @@ class Profile: NSObject, NSCoding {
         self.password = password
         self.moneyUnit = moneyUnit
         self.email = email
-        
-    }
+     }
     
     //MARK: NSCoding
     
@@ -79,11 +73,7 @@ class Profile: NSObject, NSCoding {
             return nil
         }
         
-        // Must call designated initializer.
-        self.init(password: password, moneyUnit: moneyUnit, email: email)
         
+        self.init(password: password, moneyUnit: moneyUnit, email: email)
     }
-    
-    
-    
-}
+ }
